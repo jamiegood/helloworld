@@ -1,4 +1,5 @@
 # Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
+
 This project was bootstrapped with Fastify-CLI.
 
 ## Available Scripts
@@ -20,4 +21,24 @@ Run the test cases.
 
 ## Learn More
 
+see secrets here:
+
+https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets?tabs=azure-portal
+
 To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
+
+az login
+
+docker build -t fastify-docker .
+
+az acr build --registry $ACR_NAME --image $API_NAME .
+
+az containerapp create \
+ --name $API_NAME \
+  --resource-group $RESOURCE_GROUP \
+  --environment $ENVIRONMENT \
+  --image $ACR_NAME.azurecr.io/$API_NAME \
+ --target-port 3000 \
+ --ingress 'external' \
+ --registry-server $ACR_NAME.azurecr.io \
+ --query properties.configuration.ingress.fqdn
