@@ -42,3 +42,19 @@ az containerapp create \
  --ingress 'external' \
  --registry-server $ACR_NAME.azurecr.io \
  --query properties.configuration.ingress.fqdn
+
+docker build -t helloworld .
+
+az acr build --registry thefullstackcontainerregistry --image helloworld .
+
+az containerapp create \
+ --name helloworld \
+ --resource-group thefullstack-production \
+ --environment thefullstack-container-app-env-production \
+ --image thefullstackcontainerregistry.azurecr.io/helloworld \
+ --target-port 3000 \
+ --ingress 'external' \
+ --registry-server thefullstackcontainerregistry.azurecr.io \
+ --query properties.configuration.ingress.fqdn
+
+http://thefullstackcontainerregistry.azurecr.io/
