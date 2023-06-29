@@ -58,3 +58,21 @@ az containerapp create \
  --query properties.configuration.ingress.fqdn
 
 http://thefullstackcontainerregistry.azurecr.io/
+
+TRY THIS
+
+az login --tenant ee7a106d-f6a8-4abe-bffd-58c24e240a34
+
+az acr build --registry tfscontainerregistrydev.azurecr.io --image helloworld .
+
+az containerapp create \
+ --name helloworld \
+ --resource-group thefullstack-production \
+--environment thefullstack-container-app-env-production \
+ --image tfscontainerregistrydev.azurecr.io/helloworld \
+ --target-port 3000 \
+ --ingress 'external' \
+ --registry-server tfscontainerregistrydev.azurecr.io \
+ --query properties.configuration.ingress.fqdn
+
+## https://helloworld.whitecoast-48b44e9c.germanywestcentral.azurecontainerapps.io/example
