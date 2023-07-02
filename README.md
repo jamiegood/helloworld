@@ -69,10 +69,11 @@ az containerapp create \
  --name helloworld \
  --resource-group thefullstack-production \
 --environment thefullstack-container-app-env-production \
- --image tfscontainerregistrydev.azurecr.io/helloworld \
+ --image tfscontainerregistrydev.azurecr.io/helloworld:latest \
  --target-port 3000 \
  --ingress 'external' \
  --registry-server tfscontainerregistrydev.azurecr.io \
  --query properties.configuration.ingress.fqdn
+--environment-variables 'jamie'='set for containerapp create command' 'MinLength'='8'
 
 ## https://helloworld.whitecoast-48b44e9c.germanywestcentral.azurecontainerapps.io/example
